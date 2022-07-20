@@ -1,0 +1,48 @@
+name: slim-ci
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      -
+        name: Checkout 
+        uses: actions/checkout@v2
+      -
+        name: Login to Docker Hub
+        uses: docker/login-action@v1
+        if: github.event_name != 'pull_request'
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      -
+        run: wget https://github.com/Exiled-Team/EXILED/releases/download/5.3.0-beta.4/Exiled.Installer-Linux
+      -
+        name: Build and push
+        uses: docker/build-push-action@v2
+        if: github.event_name != 'pull_request'
+        with:
+          context: .
+          file: ./slim/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/scpsl-server:slim
+      -
+        name: Build test
+        uses: docker/build-push-action@v2
+        if: github.event_name == 'pull_request'
+        with:
+          context: .
+          file: ./slim/Dockerfile
+          push: false
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/scpsl-server:slim
