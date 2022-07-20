@@ -1,10 +1,10 @@
-name: build-latest
+name: latest-ci
 
 on:
   push:
-    branches: [ "latest" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "latest" ]
+    branches: [ "main" ]
 
 jobs:
 
@@ -34,7 +34,7 @@ jobs:
         if: github.event_name != 'pull_request'
         with:
           context: .
-          file: ./Dockerfile
+          file: ./latest/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/scpsl-server:latest
       -
@@ -43,6 +43,6 @@ jobs:
         if: github.event_name == 'pull_request'
         with:
           context: .
-          file: ./Dockerfile
+          file: ./latest/Dockerfile
           push: false
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/scpsl-server:latest
