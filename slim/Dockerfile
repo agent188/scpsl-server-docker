@@ -1,4 +1,4 @@
-FROM mono:6.12.0.107-slim
+FROM mono:slim
 STOPSIGNAL SIGKILL
 RUN useradd scp -m
 COPY start.sh /home/scp
