@@ -2,6 +2,7 @@ FROM mono:latest
 STOPSIGNAL SIGKILL
 RUN useradd scp -m
 COPY start.sh /home/scp
+RUN chmod +x /home/scp/start.sh
 COPY Exiled.Installer-Linux /home/scp
 RUN apt-get update \
 	&& apt-get install lib32gcc1 libicu63 --no-install-recommends -y \
