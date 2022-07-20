@@ -34,9 +34,9 @@ jobs:
         if: github.event_name != 'pull_request'
         with:
           context: .
-          file: ./latest/Dockerfile
+          file: ./slim/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/scpsl-server:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/scpsl-server:slim
       -
         name: Build test
         uses: docker/build-push-action@v2
