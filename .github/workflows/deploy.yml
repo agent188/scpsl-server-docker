@@ -26,12 +26,16 @@ jobs:
       -
         name: Download Exiled Installer
         run: wget https://github.com/Exiled-Team/EXILED/releases/download/5.3.0-beta.4/Exiled.Installer-Linux
+      - 
+        name: create directory
+        run: mkdir containers
       -
         name: Build and push latest version
         uses: docker/build-push-action@v2
         with:
           context: .
           file: ./latest/Dockerfile
+          outputs: type=local,dest=containers/latest.tar
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/scpsl-server:latest
       -
@@ -40,16 +44,9 @@ jobs:
         with:
           context: .
           file: ./slim/Dockerfile
+          outputs: type=local,dest=containers/slim.tar
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/scpsl-server:slim
-      - name: create directory
-        run: mkdir containers
-      -
-        name: Save build latest
-        run: docker save angryagent/scpsl-server:latest | gzip > containers/latest.tar.gz
-      -
-        name: Save build slim
-        run: docker save angryagent/scpsl-server:slim | gzip > containers/slim.tar.gz
       - 
         name: upload artifact
         uses: actions/upload-artifact@v3
