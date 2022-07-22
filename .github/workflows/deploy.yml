@@ -24,6 +24,7 @@ jobs:
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       -
+        name: Download Exiled Installer
         run: wget https://github.com/Exiled-Team/EXILED/releases/download/5.3.0-beta.4/Exiled.Installer-Linux
       -
         name: Build and push latest version
@@ -41,4 +42,18 @@ jobs:
           file: ./slim/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/scpsl-server:slim
+      - name: create directory
+        run: mkdir containers
+      -
+        name: Save build
+        run: docker save angryagent/scpsl-server:latest | gzip > containers/latest.tar.gz
+      -
+        name: Save build
+        run: docker save angryagent/scpsl-server:slim | gzip > containers/slim.tar.gz
+      - 
+        name: upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+            name: containers
+            path: containers
  
