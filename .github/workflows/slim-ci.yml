@@ -26,7 +26,7 @@ jobs:
         name: Save build
         run: docker save ${{ secrets.DOCKER_HUB_USERNAME }}/scpsl-server:slim | gzip > container.tar.gz
       - 
-        name: upload artifactuses
+        name: upload artifact
         uses: actions/upload-artifact@v3
         with:
             name: container
