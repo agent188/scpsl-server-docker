@@ -22,8 +22,9 @@ jobs:
       -
         name: Save build
         uses: actions/checkout@v3
-        run: docker build save angryagent/scpsl-server:slim | gzip > container.tar.gz
-      - uses: actions/upload-artifact@v3
+        run: docker save angryagent/scpsl-server:slim | gzip > container.tar.gz
+      - 
+        name: upload artifactuses: actions/upload-artifact@v3
         with:
             name: container
             path: container.tar.gz
