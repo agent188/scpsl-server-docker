@@ -35,7 +35,6 @@ jobs:
         with:
           context: .
           file: ./latest/Dockerfile
-          outputs: type=local,dest=containers/latest.tar
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/scpsl-server:latest
       -
@@ -44,8 +43,21 @@ jobs:
         with:
           context: .
           file: ./slim/Dockerfile
-          outputs: type=local,dest=containers/slim.tar
           push: true
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/scpsl-server:slim
+      -
+        name: save latest version
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          outputs: type=tar,dest=containers/latest.tar
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/scpsl-server:latest
+      -
+        name: save slim version
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          outputs: type=tar,dest=containers/slim.tar
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/scpsl-server:slim
       - 
         name: upload artifact
