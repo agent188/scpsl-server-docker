@@ -45,10 +45,10 @@ jobs:
       - name: create directory
         run: mkdir containers
       -
-        name: Save build
+        name: Save build latest
         run: docker save angryagent/scpsl-server:latest | gzip > containers/latest.tar.gz
       -
-        name: Save build
+        name: Save build slim
         run: docker save angryagent/scpsl-server:slim | gzip > containers/slim.tar.gz
       - 
         name: upload artifact
