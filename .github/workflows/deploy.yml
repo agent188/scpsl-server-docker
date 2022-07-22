@@ -33,7 +33,7 @@ jobs:
           context: .
           file: ./latest/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/scpsl-server:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/scpsl-server:latest,${{ secrets.DOCKER_HUB_USERNAME }}/scpsl-server:${{ env.GITHUB_REF_NAME }}
       -
         name: Build and push slim version
         uses: docker/build-push-action@v2
@@ -41,30 +41,5 @@ jobs:
           context: .
           file: ./slim/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/scpsl-server:slim
-      - 
-        name: create directory
-        run: mkdir containers
-      -
-        name: save latest version
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./latest/Dockerfile
-          outputs: type=tar,dest=containers/latest.tar
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/scpsl-server:latest
-      -
-        name: save slim version
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./slim/Dockerfile
-          outputs: type=tar,dest=containers/slim.tar
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/scpsl-server:slim
-      - 
-        name: upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-            name: containers
-            path: containers
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/scpsl-server:slim,${{ secrets.DOCKER_HUB_USERNAME }}/scpsl-server:${{ env.GITHUB_REF_NAME }}-slim
  
