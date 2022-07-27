@@ -1,4 +1,5 @@
 #!/bin/bash
+umask 000
 function CheckExit() {
 	if [[ $EXIT_AFTER_UPDATE == "TRUE" ]]; then
 		exit
