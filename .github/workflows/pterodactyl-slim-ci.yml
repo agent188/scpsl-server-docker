@@ -1,4 +1,4 @@
-name: slim-ci
+name: pterodactyl-slim-ci
 
 on:
   push:

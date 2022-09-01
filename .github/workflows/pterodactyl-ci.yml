@@ -1,4 +1,4 @@
-name: latest-ci
+name: pterodactyl-ci
 
 on:
   push:
