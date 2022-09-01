@@ -1,6 +1,6 @@
 FROM mono:latest
 MAINTAINER Angry Agent, <angry_agent@vk.com>
-RUN useradd scp -m
+RUN useradd container -m
 COPY entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 COPY Exiled.Installer-Linux /
@@ -12,7 +12,7 @@ RUN apt-get update \
 	&& apt-get install lib32gcc1 libicu63 --no-install-recommends -y \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& rm -rf /tmp/*
-WORKDIR /home/scp
+WORKDIR /home/container
 ENTRYPOINT ["/bin/bash","-c","/entrypoint.sh"]
-USER scp
-ENV USER=scp HOME=/home/scp
+USER container
+ENV USER=container HOME=/home/container

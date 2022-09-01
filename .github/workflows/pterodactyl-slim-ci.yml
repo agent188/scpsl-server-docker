@@ -1,0 +1,34 @@
+name: slim-ci
+
+on:
+  push:
+    branches: [ "*" ]
+  pull_request:
+    branches: [ "*" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Download Exiled Installer
+        run: wget https://github.com/Exiled-Team/EXILED/releases/download/5.3.0/Exiled.Installer-Linux
+      -
+        name: Build test
+        run: docker build . --file ./pterodactyl-slim/Dockerfile --tag ${{ secrets.DOCKER_HUB_USERNAME }}/scpsl-server:pterodactyl-slim
+      -
+        name: Save build
+        run: docker save ${{ secrets.DOCKER_HUB_USERNAME }}/scpsl-server:pterodactyl-slim | gzip > container.tar.gz
+      - 
+        name: upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+            name: container
+            path: container.tar.gz
+

@@ -1,20 +1,18 @@
 FROM mono:slim
-STOPSIGNAL SIGKILL
+MAINTAINER Angry Agent, <angry_agent@vk.com>
 RUN useradd scp -m
-COPY start.sh /home/scp
-RUN chmod +x /home/scp/start.sh
-COPY Exiled.Installer-Linux /home/scp
-RUN chmod +x /home/scp/Exiled.Installer-Linux
+COPY entrypoint.sh /
+RUN chmod +x /entrypoint.sh
+COPY Exiled.Installer-Linux /
+RUN chmod +x /Exiled.Installer-Linux
+RUN mkdir /steamcmd
+COPY --from=cm2network/steamcmd /home/steam/steamcmd /steamcmd
+RUN chmod 777 -R /steamcmd
 RUN apt-get update \
 	&& apt-get install lib32gcc1 libicu63 --no-install-recommends -y \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& rm -rf /tmp/*
 WORKDIR /home/scp
-ENTRYPOINT ["/bin/bash","-c","/home/scp/start.sh"]
+ENTRYPOINT ["/bin/bash","-c","/entrypoint.sh"]
 USER scp
-RUN mkdir /home/scp/scpsl && \
-	mkdir /home/scp/.config && \
-	mkdir /home/scp/.config/SCP\ Secret\ Laboratory && \
-	mkdir /home/scp/.config/EXILED && \
-	mkdir /home/scp/steamcmd
-COPY --from=cm2network/steamcmd /home/steam/steamcmd /home/scp/steamcmd
+ENV USER=scp HOME=/home/scp

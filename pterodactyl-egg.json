@@ -1,0 +1,133 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2022-09-01T14:44:50-04:00",
+    "name": "SCP SL",
+    "author": "angry_agent@vk.com",
+    "description": "SCP Secret Laboratory Dedicated Server with optionally install EXILED.\r\nIf your folder with server is empty, container automatically install SCP Secret Laboratory Dedicated Server via steamcmd.\r\nSee: https:\/\/hub.docker.com\/r\/angryagent\/scpsl-server",
+    "features": null,
+    "docker_images": {
+        "Slim version(it does not include a full-fledged mono, has the smallest weight)": "angryagent\/scpsl-server:pterodactyl-slim",
+        "Simple version(include a full-fledged mono)": "angryagent\/scpsl-server:pterodactyl"
+    },
+    "file_denylist": [],
+    "startup": "\/entrypoint.sh",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Waiting for players..\"\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "stop": "exit"
+    },
+    "scripts": {
+        "installation": {
+            "script": null,
+            "container": "alpine:3.4",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "EXTRA_ARGS",
+            "description": "",
+            "env_variable": "EXTRA_ARGS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "max:200",
+            "field_type": "text"
+        },
+        {
+            "name": "EXILED_INSTALL",
+            "description": "",
+            "env_variable": "EXILED_INSTALL",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "max:200",
+            "field_type": "text"
+        },
+        {
+            "name": "SCPSL_UPDATE",
+            "description": "",
+            "env_variable": "SCPSL_UPDATE",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "max:200",
+            "field_type": "text"
+        },
+        {
+            "name": "BETA_BRANCH",
+            "description": "",
+            "env_variable": "BETA_BRANCH",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "max:200",
+            "field_type": "text"
+        },
+        {
+            "name": "BETA_PASSWORD",
+            "description": "",
+            "env_variable": "BETA_PASSWORD",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "max:200",
+            "field_type": "text"
+        },
+        {
+            "name": "EXILED_UPDATE",
+            "description": "",
+            "env_variable": "EXILED_UPDATE",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "max:200",
+            "field_type": "text"
+        },
+        {
+            "name": "EXILED_VERSION",
+            "description": "",
+            "env_variable": "EXILED_VERSION",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "max:200",
+            "field_type": "text"
+        },
+        {
+            "name": "EXILED_PRE_RELEASES",
+            "description": "",
+            "env_variable": "EXILED_PRE_RELEASES",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "max:200",
+            "field_type": "text"
+        },
+        {
+            "name": "EXILED_GITHUB_TOKEN",
+            "description": "",
+            "env_variable": "EXILED_GITHUB_TOKEN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "max:200",
+            "field_type": "text"
+        },
+        {
+            "name": "EXIT_AFTER_UPDATE",
+            "description": "",
+            "env_variable": "EXIT_AFTER_UPDATE",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "max:200",
+            "field_type": "text"
+        }
+    ]
+}

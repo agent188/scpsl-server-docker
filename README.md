@@ -73,3 +73,9 @@ Run container without EXILED:
 Run container with EXILED:
 
 `docker run --name scpsl -p "7777:7777/udp" -v ~/.config/EXILED:/home/scp/.config/EXILED -v ~/.config/SCP\ Secret\ Laboratory:/home/scp/.config/SCP\ Secret\ Laboratory -v ~/scpsl:/home/scp/scpsl -e EXILED_INSTALL=TRUE -e SCPSL_PORT=7777 -it angryagent/scpsl-server:slim`
+
+
+Pterodactyl egg
+==============
+
+https://raw.githubusercontent.com/agent188/scpsl-server-docker/main/pterodactyl-egg.json

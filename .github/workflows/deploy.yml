@@ -43,3 +43,19 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/scpsl-server:slim
  
+      -
+        name: Build and push pterodactyl version
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./pterodactyl/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/scpsl-server:pterodactyl
+      -
+        name: Build and push pterodactyl slim version
+        uses: docker/build-push-action@v2
+        with:
+          context: .  
+          file: ./pterodactyl-slim/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/scpsl-server:pterodactyl-slim
