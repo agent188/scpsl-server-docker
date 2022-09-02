@@ -6,6 +6,9 @@ fi
 if [[ ! -d ~/scpsl ]]; then
 	mkdir ~/scpsl
 fi
+if [[ ! -d ~/steamcmd ]]; then
+	mkdir ~/steamcmd
+fi
 if [[ ! -d ~/.config/SCP\ Secret\ Laboratory ]]; then
         mkdir -p ~/.config/SCP\ Secret\ Laboratory
 fi
@@ -13,7 +16,6 @@ if [[ ! -d ~/.config/EXILED ]]; then
         mkdir -p ~/.config/EXILED
 fi
 if [[ ! $(ls -A ~/steamcmd) ]]; then
-	mkdir ~/steamcmd
 	cd ~/steamcmd
 	curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
 fi
