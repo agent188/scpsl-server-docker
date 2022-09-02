@@ -1,6 +1,6 @@
 #!/bin/bash
 umask 000
-if [[ -n $SERVER_PORT ]]; then
+if [[ $SERVER_PORT ]]; then
 	export SCPSL_PORT=$SERVER_PORT
 fi
 if [[ ! -d ~/scpsl ]]; then
@@ -12,11 +12,14 @@ fi
 if [[ ! -d ~/.config/EXILED ]]; then
         mkdir -p ~/.config/EXILED
 fi
-if [[ ! -d ~/steamcmd && $USER == "container" ]]; then # thanks pterodactyl developers for read only fs
-	cp -r /steamcmd ~
-	STEAMCMD_PATH="$HOME/steamcmd"
-else
-	STEAMCMD_PATH="/steamcmd"
+if [[ ! -d ~/steamcmd ]]; then
+	mkdir ~/steamcmd
+	cd ~/steamcmd
+	curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
+fi
+if [[ ! -f ~/Exiled.Installer-Linux ]]; then
+	curl -L "https://github.com/Exiled-Team/EXILED/releases/download/5.3.0/Exiled.Installer-Linux" -o ~/Exiled.Installer-Linux
+	chmod +x ~/Exiled.Installer-Linux
 fi
 function CheckExit() {
 	if [[ $EXIT_AFTER_UPDATE == "TRUE" ]]; then
@@ -30,7 +33,7 @@ function InstallSCPSL() {
                 fi
                 BETA_BRANCH="-beta \"$BETA_BRANCH\""
         fi
-	$STEAMCMD_PATH/steamcmd.sh +force_install_dir $HOME/scpsl +login anonymous +app_update 996560 $BETA_BRANCH $BETA_PASSWORD validate +quit
+	~/steamcmd/steamcmd.sh +force_install_dir $HOME/scpsl +login anonymous +app_update 996560 $BETA_BRANCH $BETA_PASSWORD validate +quit
 	if [[ $EXILED_UPDATE != "TRUE" && $EXILED_INSTALL != "TRUE" ]]; then
 		CheckExit
 	fi
@@ -45,7 +48,7 @@ function ExiledInstall() {
 	if [[ $EXILED_GITHUB_TOKEN ]]; then
 		EXILED_GITHUB_TOKEN="--github-token $EXILED_GITHUB_TOKEN"
 	fi
-        /Exiled.Installer-Linux $EXILED_VERSION $EXILED_PRE_RELEASES $EXILED_GITHUB_TOKEN
+        ~/Exiled.Installer-Linux $EXILED_VERSION $EXILED_PRE_RELEASES $EXILED_GITHUB_TOKEN
 	CheckExit
 }
 if [[ $SCPSL_UPDATE == "TRUE" ]]; then
