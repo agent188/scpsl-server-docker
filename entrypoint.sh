@@ -12,7 +12,7 @@ fi
 if [[ ! -d ~/.config/EXILED ]]; then
         mkdir -p ~/.config/EXILED
 fi
-if [[ ! -d ~/steamcmd ]]; then
+if [[ ! $(ls -A ~/steamcmd) ]]; then
 	mkdir ~/steamcmd
 	cd ~/steamcmd
 	curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
