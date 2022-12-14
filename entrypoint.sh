@@ -31,9 +31,9 @@ function CheckExit() {
 function InstallSCPSL() {
         if [[ $BETA_BRANCH ]]; then
                 if [[ $BETA_PASSWORD ]]; then
-                        BETA_PASSWORD="-betapassword \"$BETA_PASSWORD\""
+                        BETA_PASSWORD="-betapassword $BETA_PASSWORD"
                 fi
-                BETA_BRANCH="-beta \"$BETA_BRANCH\""
+                BETA_BRANCH="-beta $BETA_BRANCH"
         fi
 	~/steamcmd/steamcmd.sh +force_install_dir $HOME/scpsl +login anonymous +app_update 996560 $BETA_BRANCH $BETA_PASSWORD validate +quit
 	if [[ $EXILED_UPDATE != "TRUE" && $EXILED_INSTALL != "TRUE" ]]; then
