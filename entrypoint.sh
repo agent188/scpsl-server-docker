@@ -20,7 +20,7 @@ if [[ ! $(ls -A ~/steamcmd) ]]; then
 	curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
 fi
 if [[ ! -f ~/Exiled.Installer-Linux ]]; then
-	curl -L "https://github.com/Exiled-Team/EXILED/releases/download/5.3.0/Exiled.Installer-Linux" -o ~/Exiled.Installer-Linux
+	curl -L "https://github.com/Exiled-Team/EXILED/releases/download/6.0.0-beta.20/Exiled.Installer-Linux" -o ~/Exiled.Installer-Linux
 	chmod +x ~/Exiled.Installer-Linux
 fi
 function CheckExit() {
